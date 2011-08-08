@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Section Subnav
- * Plugin URI: 
+ * Plugin URI: https://github.com/benknight/section-subnav
  * Description: A WordPress plugin that gives you the <code>section_subnav()</code> template tag to use anywhere in your theme to show a subnav menu.  Also makes a widget available to add to your theme's sidebars.
- * Version: 0.1
+ * Version: 0.9
  * Author: Benjamin Knight
  * Author URI: http://benknight.me
  *
@@ -19,10 +19,10 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @package SectionSubnav
- * @version 0.1.0
+ * @version 0.9
  * @author Benjamin Knight <ben@benknight.me>
  * @copyright Copyright © 2011, Benjamin Knight
- * @link 
+ * @link https://github.com/benknight/section-subnav
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
