@@ -30,10 +30,10 @@ function section_subnav( $args = array(), $instance = array() ) {
 
 	// Set up the default arguments for the breadcrumb.
 	$defaults = array(
-		'before_subnav' => '<nav class="section-subnav">',
-		'after_subnav' => '</nav>',
-		'before_title' => '<h1 class="section-title">',
-		'after_title' => '</h1>',
+		'before_widget' => '<nav id="%1$s" class="widget %2$s">',
+		'after_widget' => "</nav>",
+		'before_title' => '<h3 class="widget-title section-subnav-title">',
+		'after_title' => '</h3>',
 		'echo' => true
 	);
 
@@ -74,6 +74,8 @@ function section_subnav( $args = array(), $instance = array() ) {
 		
 		endforeach; endif;
 	}
+	
+	return false;
 }
 
 class Section_Subnav extends WP_Widget {
