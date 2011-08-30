@@ -52,8 +52,6 @@ This function also provides the `section_subnav_args` filter hook for writing le
 
 This section describes how to install the plugin and get it working.
 
-e.g.
-
 1. Upload `section-subnav` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Add the widget to a sidebar or use the `section_subnav()` function in one of your theme templates.
