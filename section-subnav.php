@@ -30,9 +30,9 @@ function section_subnav( $args = array(), $instance = array() ) {
 
 	// Set up the default arguments for the breadcrumb.
 	$defaults = array(
-		'before_widget' => '<nav id="%1$s" class="widget %2$s">',
+		'before_widget' => '<nav id="section-subnav" class="widget widget_section-subnav">',
 		'after_widget' => "</nav>",
-		'before_title' => '<h3 class="widget-title section-subnav-title">',
+		'before_title' => '<h3 class="section-subnav-title widget-title">',
 		'after_title' => '</h3>',
 		'echo' => true
 	);
@@ -61,10 +61,10 @@ function section_subnav( $args = array(), $instance = array() ) {
 				|| strstr( $menu_item_class, 'current-menu-parent' ) )
 				&& ! empty( $menu_item->ul ) 
 				&& strstr( (string) $menu_item->ul[0]['class'], 'sub-menu' ) ) {
-					$subnav  = $args['before_subnav'];
+					$subnav  = $args['before_widget'];
 					$subnav .= $args['before_title'] . $menu_item->a->asXML() . $args['after_title'];
 					$subnav .= $menu_item->ul->asXML();
-					$subnav .= $args['after_subnav'];
+					$subnav .= $args['after_widget'];
 	
 					if ( $args['echo'] )
 						echo $subnav;
