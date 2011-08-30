@@ -1,39 +1,52 @@
-=== Plugin Name ===
-Contributors: markjaquith, mdawaffe (this should be a list of wordpress.org userid's)
-Donate link: http://example.com/
-Tags: comments, spam
-Requires at least: 2.0.2
-Tested up to: 2.1
-Stable tag: 4.3
+=== Section Subnav ===
+Contributors: benknight
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=NYCGJ7YCGUTAQ&lc=US&item_name=Benjamin%20Knight&item_number=section%2dsubnav&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
+Tags: widget, menu, navigation
+Requires at least: 3.1
+Tested up to: 3.2.1
+Stable tag: 0.9
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+Adds a widget and template function for displaying subnavigation based on the current navigation state.
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+This is a simple plugin that was born out of working on several projects with sectional navigations.  For example, consider the following common navigation tree structure:
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+* Home
+* Item
+* About Us
+ * Sub-item #1
+ * Sub-item #2
+* Item
+* Item
 
-A few notes about the sections above:
+Then, whenever on the "About Us" page or any of its sub-items, it would output that peice of the navigation:
 
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
+* About Us
+ * Sub-item #1
+ * Sub-item #2
 
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
+This is particularly useful for websites that have a top horizontal navigation which shows top-level items and want to show a vertical subnavigation in the sidebar.
 
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+This plugin works by parsing the output of the `wp_nav_menu` function as XML and analyzing the CSS class hooks (current-menu-ancestor, current-menu-item, and current-menu-parent).  Because it uses PHP's SimpleXML library it therefore requires PHP 5+.  It uses the theme's registered menu locations.
+
+This plugin also exposes the `section_subnav()` function for theme developers to use as a template tag to manually place a subnav inside the theme.  Here is the usage:
+
+`<?php
+
+	section_subnav( array( // defaults
+		'before_widget' => '<nav id="section-subnav" class="widget widget_section-subnav">',
+		'after_widget' => "</nav>",
+		'before_title' => '<h3 class="section-subnav-title widget-title">',
+		'after_title' => '</h3>',
+		'echo' => true
+	));
+
+?>`
+
+It returns false when there is no subnavigation.
+
+This function also provides the `section_subnav_args` filter hook for writing less code and easier integration with other plugins and child themes.
 
 == Installation ==
 
@@ -41,70 +54,15 @@ This section describes how to install the plugin and get it working.
 
 e.g.
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
+1. Upload `section-subnav` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Add the widget to a sidebar or use the `section_subnav()` function in one of your theme templates.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
-
 == Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
-2. This is the second screen shot
 
 == Changelog ==
 
-= 1.0 =
-* A change since the previous version.
-* Another change.
-
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
-
-== Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
+= 0.9 =
+* Initial release.
