@@ -28,7 +28,7 @@
 
 function section_subnav( $args = array(), $instance = array() ) {
 
-	// Set up the default arguments for the breadcrumb.
+	// Set up the default arguments
 	$defaults = array(
 		'before_widget' => '<nav id="section-subnav" class="widget widget_section-subnav">',
 		'after_widget' => "</nav>",
@@ -40,7 +40,7 @@ function section_subnav( $args = array(), $instance = array() ) {
 	// Apply filters to the arguments.
 	$args = apply_filters( 'section_subnav_args', $args );
 
-	// Parse the arguments and extract them for easy variable naming.
+	// Parse the arguments
 	$args = wp_parse_args( $args, $defaults );
 	
 	// Get all registered nav menus
