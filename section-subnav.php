@@ -61,8 +61,10 @@ function section_subnav( $args = array(), $instance = array() ) {
 				|| strstr( $menu_item_class, 'current-menu-parent' ) )
 				&& ! empty( $menu_item->ul ) 
 				&& strstr( (string) $menu_item->ul[0]['class'], 'sub-menu' ) ) {
+				
+					$instance_title = empty( $instance['title'] ) ? $menu_item->a->asXML() : $instance['title'];
 					$subnav  = $args['before_widget'];
-					$subnav .= $args['before_title'] . $menu_item->a->asXML() . $args['after_title'];
+					$subnav .= $args['before_title'] . $instance_title . $args['after_title'];
 					$subnav .= $menu_item->ul->asXML();
 					$subnav .= $args['after_widget'];
 	
@@ -86,6 +88,24 @@ class Section_Subnav extends WP_Widget {
 
 	function widget( $args, $instance ) {
 		section_subnav( $args, $instance );
+	}
+	
+	function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		$instance['title'] = strip_tags( $new_instance['title'] );
+		return $instance;
+	}
+	
+	function form( $instance ) {
+		if ( $instance ) {
+			$title = esc_attr( $instance[ 'title' ] );
+		}
+		?>
+		<p>
+		<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label> 
+		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>">
+		</p>
+		<?php 
 	}
 
 }
