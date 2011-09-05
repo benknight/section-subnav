@@ -72,5 +72,8 @@ Like WordPress, this plugin is only aware of the menus you "tell" it about, mean
 
 == Changelog ==
 
+= 0.9.1 =
+* Added the ability to specify a custom widget title.
+
 = 0.9 =
 * Initial release.
